@@ -1,0 +1,71 @@
+{
+  "entities": {
+    "User": {
+      "path": "/users/{userId}",
+      "fields": {
+        "userId": { "type": "string", "required": true },
+        "displayName": { "type": "string", "required": true },
+        "email": { "type": "string", "required": true },
+        "photoUrl": { "type": "string", "required": false },
+        "loyaltyPoints": { "type": "number", "required": true },
+        "tier": { "type": "string", "required": true },
+        "createdAt": { "type": "timestamp", "required": true },
+        "updatedAt": { "type": "timestamp", "required": true }
+      }
+    },
+    "Reservation": {
+      "path": "/users/{userId}/reservations/{reservationId}",
+      "fields": {
+        "userId": { "type": "string", "required": true },
+        "guestName": { "type": "string", "required": true },
+        "guestPhone": { "type": "string", "required": true },
+        "partySize": { "type": "number", "required": true },
+        "seatingArea": { "type": "string", "required": true },
+        "date": { "type": "string", "required": true },
+        "timeSlot": { "type": "string", "required": true },
+        "specialRequests": { "type": "string", "required": false },
+        "status": { "type": "string", "required": true },
+        "createdAt": { "type": "timestamp", "required": true }
+      }
+    },
+    "Order": {
+      "path": "/users/{userId}/orders/{orderId}",
+      "fields": {
+        "userId": { "type": "string", "required": true },
+        "itemsSummary": { "type": "string", "required": true },
+        "itemCount": { "type": "number", "required": true },
+        "totalAmount": { "type": "number", "required": true },
+        "orderType": { "type": "string", "required": true },
+        "paymentMethod": { "type": "string", "required": true },
+        "paymentStatus": { "type": "string", "required": true },
+        "orderStatus": { "type": "string", "required": true },
+        "pointsEarned": { "type": "number", "required": true },
+        "createdAt": { "type": "timestamp", "required": true }
+      }
+    },
+    "Reward": {
+      "path": "/users/{userId}/rewards/{rewardId}",
+      "fields": {
+        "userId": { "type": "string", "required": true },
+        "rewardTitle": { "type": "string", "required": true },
+        "pointsCost": { "type": "number", "required": true },
+        "voucherCode": { "type": "string", "required": true },
+        "isUsed": { "type": "boolean", "required": true },
+        "createdAt": { "type": "timestamp", "required": true }
+      }
+    },
+    "Review": {
+      "path": "/reviews/{reviewId}",
+      "fields": {
+        "userId": { "type": "string", "required": true },
+        "authorName": { "type": "string", "required": true },
+        "rating": { "type": "number", "required": true },
+        "foodRating": { "type": "number", "required": true },
+        "serviceRating": { "type": "number", "required": true },
+        "ambianceRating": { "type": "number", "required": true },
+        "comment": { "type": "string", "required": true },
+        "createdAt": { "type": "timestamp", "required": true }
+      }
+    }
+  }
+}

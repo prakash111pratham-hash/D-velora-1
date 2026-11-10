@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --velora-espresso: #2E1810;
+    --velora-gold: #C5A059;
+    --velora-amber: #D97706;
+    --velora-cream: #FAF7F2;
+    --velora-surface: #FFFFFF;
+  }
+
+  body {
+    background-color: #FAF7F2;
+    color: #23160F;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+
+  h1, h2, h3, .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+}

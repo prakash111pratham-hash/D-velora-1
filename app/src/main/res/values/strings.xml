@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">D Velora</string>
+    <string name="tagline">Cafe • Restaurant • Est. 2026</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_menu">Menu</string>
+    <string name="nav_reservations">Reserve</string>
+    <string name="nav_rewards">Rewards</string>
+    <string name="nav_profile">Account</string>
+    <string name="sign_in_title">Welcome to D Velora</string>
+    <string name="sign_in_subtitle">Sign in to earn loyalty points, reserve tables, and enjoy exclusive member dining perks</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="reserve_table_title">Reserve a Table</string>
+    <string name="cart_title">Your Dining Cart</string>
+    <string name="checkout">Proceed to Checkout</string>
+    <string name="rewards_title">Loyalty Club</string>
+    <string name="ai_concierge_title">Chef Velora AI</string>
+    <string name="feedback_title">Guest Feedback</string>
+    <string name="default_web_client_id">456587628298-placeholder.apps.googleusercontent.com</string>
+</resources>

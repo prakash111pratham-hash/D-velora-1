@@ -1,0 +1,93 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isValidUser(data) {
+      return data.keys().hasAll(['userId', 'displayName', 'email', 'loyaltyPoints', 'tier'])
+        && data.userId is string
+        && data.displayName is string
+        && data.email is string
+        && data.loyaltyPoints is number
+        && data.tier is string;
+    }
+
+    function isValidReservation(data) {
+      return data.keys().hasAll(['userId', 'guestName', 'guestPhone', 'partySize', 'seatingArea', 'date', 'timeSlot', 'status'])
+        && data.userId is string
+        && data.guestName is string
+        && data.guestPhone is string
+        && data.partySize is number
+        && data.seatingArea is string
+        && data.date is string
+        && data.timeSlot is string
+        && data.status is string;
+    }
+
+    function isValidOrder(data) {
+      return data.keys().hasAll(['userId', 'itemsSummary', 'itemCount', 'totalAmount', 'orderType', 'paymentMethod', 'paymentStatus', 'orderStatus', 'pointsEarned'])
+        && data.userId is string
+        && data.itemsSummary is string
+        && data.itemCount is number
+        && data.totalAmount is number
+        && data.orderType is string
+        && data.paymentMethod is string
+        && data.paymentStatus is string
+        && data.orderStatus is string
+        && data.pointsEarned is number;
+    }
+
+    function isValidReward(data) {
+      return data.keys().hasAll(['userId', 'rewardTitle', 'pointsCost', 'voucherCode', 'isUsed'])
+        && data.userId is string
+        && data.rewardTitle is string
+        && data.pointsCost is number
+        && data.voucherCode is string
+        && data.isUsed is bool;
+    }
+
+    function isValidReview(data) {
+      return data.keys().hasAll(['userId', 'authorName', 'rating', 'foodRating', 'serviceRating', 'ambianceRating', 'comment'])
+        && data.userId is string
+        && data.authorName is string
+        && data.rating is number
+        && data.foodRating is number
+        && data.serviceRating is number
+        && data.ambianceRating is number
+        && data.comment is string;
+    }
+
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow write: if isOwner(userId) && (request.method == 'delete' || isValidUser(request.resource.data));
+
+      match /reservations/{reservationId} {
+        allow read: if isOwner(userId);
+        allow write: if isOwner(userId) && (request.method == 'delete' || (isValidReservation(request.resource.data) && request.resource.data.userId == userId));
+      }
+
+      match /orders/{orderId} {
+        allow read: if isOwner(userId);
+        allow write: if isOwner(userId) && (request.method == 'delete' || (isValidOrder(request.resource.data) && request.resource.data.userId == userId));
+      }
+
+      match /rewards/{rewardId} {
+        allow read: if isOwner(userId);
+        allow write: if isOwner(userId) && (request.method == 'delete' || (isValidReward(request.resource.data) && request.resource.data.userId == userId));
+      }
+    }
+
+    match /reviews/{reviewId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && request.auth.uid == request.resource.data.userId && isValidReview(request.resource.data);
+      allow update, delete: if isAuthenticated() && request.auth.uid == resource.data.userId;
+    }
+  }
+}

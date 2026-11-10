@@ -1,0 +1,6 @@
+{
+  "name": "D Velora",
+  "description": "Artisanal cafe and family restaurant with digital menu, online table reservations, loyalty rewards, and AI culinary concierge.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
